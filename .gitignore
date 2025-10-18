@@ -1,0 +1,22 @@
+# Node.js frontend
+node_modules/
+build/
+dist/
+npm-debug.log*
+yarn-error.log*
+.env
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Java / Spring Boot backend
+*.class
+*.jar
+*.war
+*.log
+target/

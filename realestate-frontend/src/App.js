@@ -1,44 +1,36 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
-import Home from './components/Home';
-import Buildings from './components/Buildings';
-import Guides from './components/Guides';
-import About from './components/About';
-import Contact from './components/Contact';
-import Login from './components/Login';
-import Register from './components/Register';
-import Alert from './components/Alert'; // ✅ Alert import
+// Context
+import { AuthProvider } from './admin/AuthContext';
+
+// Pages
+import PortalSelection from './PortalSelection';
+import UserPortal from './UserPortal';
+
+// Admin
+import AdminPortal from './admin/AdminPortal';
+import AdminLogin from './admin/Login';
 
 function App() {
   return (
-    <Router>
-      <div className="min-h-screen flex flex-col bg-white text-black">
-        {/* Navbar */}
-        <Navbar />
+    <AuthProvider>
+      <Router>
+        <Routes>
+          {/* Portal Selection (Main Landing) */}
+          <Route path="/" element={<PortalSelection />} />
 
-        {/* Alert Component */}
-        <Alert />
+          {/* User Portal (All user-related pages: home, login, signup, etc.) */}
+          <Route path="/user/*" element={<UserPortal />} />
 
-        {/* Page Content */}
-        <div className="flex-grow">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/buildings" element={<Buildings />} />
-            <Route path="/guides" element={<Guides />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Register />} />
-          </Routes>
-        </div>
+          {/* Admin Login */}
+          <Route path="/login" element={<AdminLogin />} />
 
-        {/* Footer */}
-        <Footer />
-      </div>
-    </Router>
+          {/* Admin Dashboard */}
+          <Route path="/admin/*" element={<AdminPortal />} />
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
 }
 
